@@ -1,0 +1,22 @@
+---
+  version: 1
+  schedule:
+    type: "simple"
+    interval: "10s"
+  workflow:
+    collect:
+      metrics:
+        /jtlisi/bigip/node/*/*/status_availability_state: {}
+        /jtlisi/bigip/node/*/*/tot_requests: {}
+        /jtlisi/bigip/pool/*/*/active_member_cnt: {}
+        /jtlisi/bigip/pool/*/*/connq_age_edm: {}
+      config:
+        /jtlisi/bigip:
+          host: "example.com"
+          username: "user"
+          password: "pass"
+      publish:
+        -
+          plugin_name: "file"
+          config:
+            file: "/tmp/bigip_snap.txt"
